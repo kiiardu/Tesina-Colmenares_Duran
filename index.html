@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de Materias</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <h2>Reporte Académico</h2>
+
+        <div class="form-grid">
+            <div class="campo">
+                <label>Alumno</label>
+                <input type="text" id="alumno" placeholder="Nombre completo">
+            </div>
+            <div class="campo">
+                <label>Año</label>
+                <input type="number" id="anio" min="1" max="6" placeholder="Ej: 5">
+            </div>
+            <div class="campo">
+                <label>Materia</label>
+                <input type="text" id="matNom" placeholder="Ej: Biología">
+            </div>
+            <div class="campo">
+                <label>Nota</label>
+                <input type="number" id="matNota" min="1" max="10" placeholder="1-10">
+            </div>
+            <div class="boton-centro">
+                <button onclick="procesar()">Cargar Materia</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="resultados-box">
+            <div class="info-header">
+                <span id="outAlumno">---</span> | Año: <span id="outAnio">-</span>
+            </div>
+            
+            <ul id="listaCompleta" class="lista-materias"></ul>
+
+            <div class="contadores">
+                <div class="cont-box">Aprobadas: <span id="contA">0</span></div>
+                <div class="cont-box">Desaprobadas: <span id="contD">0</span></div>
+            </div>
+
+            <div class="estadisticas-centradas">
+                <div class="stat-card">
+                    <span class="stat-label">Promedio General</span>
+                    <span id="promedio" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Notas sobre el promedio</span>
+                    <span id="contMayor" class="stat-value">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let materias = []; // Ahora guardamos objetos para ordenar fácilmente
+        let todasLasNotas = [];
+
+        function procesar() {
+            let alumno = document.getElementById("alumno").value;
+            let anio = document.getElementById("anio").value;
+            let nombreMat = document.getElementById("matNom").value;
+            let notaMat = parseFloat(document.getElementById("matNota").value);
+
+            if (alumno == "" || anio == "" || nombreMat == "" || isNaN(notaMat)) {
+                alert("Por favor, completá todos los campos.");
+                return;
+            }
+
+            materias.push({ nombre: nombreMat, nota: notaMat, recuperado: false });
+            todasLasNotas.push(notaMat);
+            
+            renderizar();
+            actualizarEstadisticas();
+
+            document.getElementById("outAlumno").textContent = alumno;
+            document.getElementById("outAnio").textContent = anio;
+            document.getElementById("matNom").value = "";
+            document.getElementById("matNota").value = "";
+            document.getElementById("matNom").focus();
+        }
+
+        function renderizar() {
+            let lista = document.getElementById("listaCompleta");
+            lista.innerHTML = "";
+            let totalA = 0;
+            let totalD = 0;
+
+            // Orden alfabético
+            materias.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+            materias.forEach(m => {
+                let li = document.createElement("li");
+                let esAprobada = m.nota >= 7;
+                if (esAprobada) totalA++; else totalD++;
+
+                li.className = esAprobada ? "fila-aprobada" : "fila-desaprobada";
+                li.innerHTML = `
+                    <span><b>${m.nombre}</b> (${m.nota}) ${m.recuperado ? '<small class="rec-label">(recuperado)</small>' : ''}</span>
+                    <div>
+                        <span class="status-tag ${esAprobada ? 'tag-aprobada' : 'tag-desaprobada'}">
+                            ${esAprobada ? 'Aprobada' : 'Desaprobada'}
+                        </span>
+                        ${!esAprobada ? `<button class="btn-edit" onclick="recuperar('${m.nombre}')">✎</button>` : ''}
+                    </div>
+                `;
+                lista.appendChild(li);
+            });
+
+            document.getElementById("contA").textContent = totalA;
+            document.getElementById("contD").textContent = totalD;
+        }
+
+        function recuperar(nombre) {
+            let nuevaNota = prompt("Nueva nota (1-10):");
+            if (nuevaNota !== null) {
+                let notaNum = parseFloat(nuevaNota);
+                if (notaNum >= 1 && notaNum <= 10) {
+                    let m = materias.find(mat => mat.nombre === nombre);
+                    let index = todasLasNotas.indexOf(m.nota);
+                    
+                    todasLasNotas[index] = notaNum;
+                    m.nota = notaNum;
+                    m.recuperado = true;
+
+                    renderizar();
+                    actualizarEstadisticas();
+                }
+            }
+        }
+
+        function actualizarEstadisticas() {
+            let suma = todasLasNotas.reduce((a, b) => a + b, 0);
+            let prom = suma / todasLasNotas.length;
+            let mayores = todasLasNotas.filter(n => n > prom).length;
+            document.getElementById("promedio").textContent = prom.toFixed(2);
+            document.getElementById("contMayor").textContent = mayores;
+        }
+    </script>
+</body>
+</html>

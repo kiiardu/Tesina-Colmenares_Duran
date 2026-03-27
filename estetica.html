@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Agenda Estética</title>
+
+<style>
+    body{ font-family: Arial; margin:0; background:#f5f6fa; display:flex; }
+    .sidebar{ width:220px; background:#ffffff; height:100vh; padding:20px; box-shadow:2px 0 5px rgba(0,0,0,0.1); position: fixed; }
+    .main{ flex:1; padding:30px; margin-left: 260px; }
+    .card{ background:white; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    input, select{ padding:8px; margin:5px; border: 1px solid #ddd; border-radius: 5px; }
+    button{ padding:8px 12px; border:none; background:#ff5c8a; color:white; cursor:pointer; border-radius:5px; transition: 0.3s; }
+    button:hover{ background: #e04a76; }
+    table{ width:100%; border-collapse:collapse; margin-top: 20px;}
+    th,td{ padding:10px; border-bottom:1px solid #ddd; text-align: left;}
+    .stat{ display:inline-block; background:#ffe0ea; padding:20px; margin:10px; border-radius:10px; }
+
+    /* --- ESTILOS DE CATEGORÍAS --- */
+    .grid-categorias {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .categoria-item {
+        cursor: pointer;
+        text-align: center;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        transition: 0.3s;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .categoria-item:hover {
+        border-color: #ff5c8a;
+        transform: translateY(-5px);
+    }
+    .categoria-item img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+    }
+    .categoria-item p {
+        margin: 8px 0;
+        font-weight: bold;
+        color: #333;
+    }
+    .selector-servicios {
+        background: #fff0f5;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+        display: none;
+        border-left: 5px solid #ff5c8a;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Agenda Estética</h2>
+    <button onclick="mostrar('inicio')">Inicio</button>
+    <button onclick="mostrar('agenda')">Agenda</button>
+    <button onclick="mostrar('clientes')">Clientes</button>
+    <button onclick="mostrar('estadisticas')">Estadísticas</button>
+</div>
+
+<div class="main">
+
+    <div id="inicio" class="pantalla">
+        <div class="card">
+            <h2>Panel Principal</h2>
+            <div class="stat"><h3 id="ingresos">$0</h3>Ingresos del día</div>
+            <div class="stat"><h3 id="turnos">0</h3>Turnos</div>
+        </div>
+    </div>
+
+    <div id="agenda" class="pantalla" style="display:none">
+        <div class="card">
+            <h2>Nuevo Turno</h2>
+            
+            <p>1. Selecciona el servicio:</p>
+            <div class="grid-categorias">
+                <div class="categoria-item" onclick="cargarSubservicios('peluqueria')">
+                    <img src="https://i.pinimg.com/1200x/69/16/0d/69160d7be31a78741b7a925ad3fec9d4.jpg" alt="Peluquería">
+                    <p>Peluquería</p>
+                </div>
+                <div class="categoria-item" onclick="cargarSubservicios('maquillaje')">
+                    <img src="https://i.pinimg.com/736x/bd/9e/0b/bd9e0bf2acdac57b5246d4287e70a378.jpg" alt="Maquillaje">
+                    <p>Maquillaje</p>
+                </div>
+                <div class="categoria-item" onclick="cargarSubservicios('manicuria')">
+                    <img src="https://i.pinimg.com/1200x/64/b1/c7/64b1c7281ae62591cfd3b0cf2e66b953.jpg" alt="Manicuría">
+                    <p>Manicuría</p>
+                </div>
+                <div class="categoria-item" onclick="cargarSubservicios('dermatologia')">
+                    <img src="https://i.pinimg.com/1200x/39/96/a3/3996a3893183d75bbca7ff59c9ed6ea2.jpg" alt="Dermatología">
+                    <p>Dermatología</p>
+                </div>
+            </div>
+
+            <div id="box-subservicios" class="selector-servicios">
+                <label><strong>Servicio específico:</strong></label><br>
+                <select id="servicioTurno"></select>
+            </div>
+
+            <hr>
+            <p>2. Datos de la cita:</p>
+            <input id="fecha" type="date">
+            <input id="hora" type="time">
+            <input id="clienteTurno" placeholder="Nombre del Cliente">
+            
+            <button onclick="agregarTurno()">Confirmar Turno</button>
+
+            <table id="tablaTurnos">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Cliente</th>
+                        <th>Servicio</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTablaTurnos"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="estadisticas" class="pantalla" style="display:none">
+        <div class="card">
+            <h2>Estadísticas</h2>
+            <p>Total turnos: <span id="totalTurnos">0</span></p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// --- DATOS ---
+let turnos = [];
+
+const catalogo = {
+    peluqueria: ["Corte de pelo (mujer, hombre, niños)", "Peinado (brushing, planchado, ondas, etc.)", "Recogidos (fiestas, eventos, bodas)", "Flequillo", "Tinte completo", "Retoque de raíces", "Mechas (tradicionales, balayage, babylights)", "Decoloración", "Matización", "Color fantasía", "Nutrición capilar"],
+    maquillaje: ["Maquillaje social (día, noche, eventos)", "Maquillaje para novias y ocasiones especiales", "Maquillaje profesional (foto, artístico, fantasía)", "Técnicas (smokey eyes, contouring, delineados)", "Pestañas postizas y diseño de cejas", "Preparación de la piel"],
+    manicuria: ["Manicura completa (limado, cutículas, esmaltado)", "Esmaltado tradicional", "Esmaltado semipermanente", "Kapping", "Soft gel", "Esculpidas en gel o acrílico", "Relleno de uñas (mantenimiento)", "Retiros"],
+    dermatologia: ["Tratamiento de acné, manchas y rosácea"]
+};
+
+// --- FUNCIONES ---
+
+function mostrar(id){
+    document.querySelectorAll(".pantalla").forEach(p => p.style.display="none");
+    document.getElementById(id).style.display="block";
+}
+
+function cargarSubservicios(categoria) {
+    const box = document.getElementById("box-subservicios");
+    const select = document.getElementById("servicioTurno");
+    
+    select.innerHTML = "";
+    
+    catalogo[categoria].forEach(servicio => {
+        let option = document.createElement("option");
+        option.value = servicio;
+        option.text = servicio;
+        select.appendChild(option);
+    });
+
+    box.style.display = "block";
+}
+
+function agregarTurno(){
+    let fecha = document.getElementById("fecha").value;
+    let hora = document.getElementById("hora").value;
+    let cliente = document.getElementById("clienteTurno").value;
+    let servicio = document.getElementById("servicioTurno").value;
+
+    if(!fecha || !hora || !cliente || !servicio) {
+        alert("Por favor completa todos los campos.");
+        return;
+    }
+
+    turnos.push({fecha, hora, cliente, servicio});
+
+    let tabla = document.getElementById("cuerpoTablaTurnos");
+    let fila = tabla.insertRow();
+    fila.insertCell(0).innerText = fecha;
+    fila.insertCell(1).innerText = hora;
+    fila.insertCell(2).innerText = cliente;
+    fila.insertCell(3).innerText = servicio;
+
+    // Limpiar
+    document.getElementById("clienteTurno").value = "";
+    document.getElementById("box-subservicios").style.display = "none";
+    
+    actualizarStats();
+}
+
+function actualizarStats(){
+    const cantidad = turnos.length;
+    document.getElementById("totalTurnos").innerText = cantidad;
+    document.getElementById("turnos").innerText = cantidad;
+}
+</script>
+
+</body>
+</html>
