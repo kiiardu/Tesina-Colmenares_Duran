@@ -33,7 +33,6 @@ body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--in
 .logo-circle { width:48px; height:48px; border-radius:50%; background:var(--rose-pale); border:1.5px solid rgba(203,147,152,0.35); display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; }
 .logo-circle-lg { width:90px; height:90px; border-radius:50%; background:var(--rose-pale); border:2px solid rgba(203,147,152,0.4); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
 
-/* ============================================================ ADMIN ============================================================ */
 #pageAdmin { flex-direction:row; }
 .sidebar { width:240px; min-height:100vh; background:var(--ink); display:flex; flex-direction:column; position:fixed; left:0; top:0; bottom:0; z-index:100; }
 .sidebar-logo { padding:24px 20px 20px; border-bottom:1px solid rgba(228,226,221,0.1); display:flex; align-items:center; gap:12px; }
@@ -97,7 +96,6 @@ body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--in
 .btn-danger { background:rgba(180,80,80,0.12); color:#a04040; border:1.5px solid rgba(180,80,80,0.25); }
 .btn-danger:hover { background:rgba(180,80,80,0.2); }
 
-/* ============================================================ CLIENT PAGE ============================================================ */
 #pageClient { font-family:'Jost',sans-serif; background:var(--cream); flex-direction:column; }
 #pageClient::before { content:''; position:fixed; inset:0; background: radial-gradient(ellipse 80% 60% at 10% 0%,rgba(203,147,152,0.13) 0%,transparent 60%), radial-gradient(ellipse 60% 50% at 90% 100%,rgba(203,147,152,0.10) 0%,transparent 55%); pointer-events:none; z-index:0; }
 .home-btn { position:fixed; top:18px; right:20px; z-index:50; width:42px; height:42px; border-radius:50%; background:var(--white); border:1.5px solid var(--border); box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; color:var(--ink-light); font-size:18px; }
@@ -237,7 +235,6 @@ body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--in
 .login-close { position:absolute; top:14px; right:16px; width:30px; height:30px; border-radius:6px; background:rgba(228,226,221,0.1); border:none; cursor:pointer; font-size:18px; color:rgba(228,226,221,0.6); display:flex; align-items:center; justify-content:center; transition:background 0.18s; }
 .login-close:hover { background:rgba(228,226,221,0.2); color:white; }
 
-/* ============================================================ PRO PAGE ============================================================ */
 #pagePro { flex-direction:column; background:var(--cream); font-family:'DM Sans',sans-serif; }
 .pro-topbar { background:var(--ink); padding:0 28px; height:60px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:50; }
 .pro-topbar-left { display:flex; align-items:center; gap:14px; }
@@ -298,7 +295,6 @@ body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--in
 .pro-slot-free { color:rgba(122,106,103,0.35); font-style:italic; font-size:12.5px; }
 .pro-slot-actions { display:flex; gap:5px; }
 
-/* Schedule tab */
 .schedule-card { background:var(--white); border-radius:14px; border:1px solid var(--border); box-shadow:var(--shadow); overflow:hidden; margin-bottom:18px; }
 .schedule-header { padding:18px 22px; border-bottom:1px solid var(--border); }
 .schedule-title { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:400; color:var(--ink); }
@@ -330,14 +326,12 @@ body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--in
 .add-block-group { display:flex; flex-direction:column; gap:4px; }
 .add-block-label { font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-light); font-weight:500; }
 
-/* ============================================================ TOAST ============================================================ */
 .toast { position:fixed; bottom:22px; right:22px; background:var(--ink); color:var(--cream); border-radius:12px; padding:13px 18px; font-size:12.5px; max-width:290px; box-shadow:0 8px 32px rgba(0,0,0,0.2); z-index:9999; display:flex; align-items:flex-start; gap:9px; transform:translateY(80px); opacity:0; transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1); }
 .toast.show { transform:none; opacity:1; }
 .toast-icon { font-size:19px; flex-shrink:0; }
 .toast-title { font-weight:500; margin-bottom:2px; font-family:'Cormorant Garamond',serif; font-size:15px; }
 .toast-body { font-size:12px; color:rgba(228,226,221,0.75); line-height:1.4; }
 
-/* ============================================================ CANCELLATION ALERT ============================================================ */
 #cancelAlert {
   display:none; position:fixed; inset:0;
   background:rgba(46,36,32,0.6);
@@ -847,7 +841,7 @@ body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--in
 </div>
 
 <script>
-/* ============================================================ PROFESSIONALS ============================================================ */
+
 const PROFESSIONALS = {
   micaela:    { pass:'Micaelauñas',         name:'Micaela',         tag:'Manicurista', color:'#cb9398', services:['manicuria'], initials:'M' },
   iara:       { pass:'Iaradermatologia',    name:'Iara',            tag:'Dermatóloga', color:'#aa9acb', services:['dermatologia'], initials:'I' },
@@ -857,7 +851,6 @@ const PROFESSIONALS = {
   admin:      { pass:'admin2024',           name:'Administración',  tag:'Todos los servicios', color:'#cb9398', services:['peluqueria','manicuria','maquillaje','dermatologia','lashista'], initials:'☆' },
 };
 
-/* ============================================================ DEFAULT SCHEDULES ============================================================ */
 const DEFAULT_SCHEDULE = {
   0: { on:false, start:'09:00', end:'17:00' },
   1: { on:true,  start:'09:00', end:'18:00' },
@@ -876,7 +869,6 @@ Object.keys(PROFESSIONALS).forEach(k => {
 const proBlockedDays = {};
 Object.keys(PROFESSIONALS).forEach(k => { proBlockedDays[k] = []; });
 
-/* ============================================================ SERVICES - ACTUALIZADOS ============================================================ */
 const SERVICES = {
   peluqueria:{ title:'✂️ Peluquería', sub:'Servicios de Vero y Aide.', icon:'✂️', label:'Peluquería', items:[
     {id:'p1',name:'Mechas',dur:'—',durMin:120,price:65000},
@@ -930,7 +922,6 @@ function add(d,n){ const r=new Date(d); r.setDate(r.getDate()+n); return r; }
 function fmt$(n){ return n===0?'A consultar':'$'+n.toLocaleString('es-AR'); }
 function fmtTotal$(n){ return n===0?'A consultar':'$'+n.toLocaleString('es-AR'); }
 
-/* ============================================================ SHARED BOOKINGS ============================================================ */
 const bookedSlots = new Set([
   `${fd(new Date())}|10:00`,
   `${fd(new Date())}|11:00`,
@@ -949,7 +940,6 @@ const bookingRecords = [
   { id:'b5', dateKey:fd(add(new Date(),2)), slot:'15:00', nombre:'Rosa P.', servicio:'Pedicuría semipermanente', svcCat:'manicuria', status:'done' },
 ];
 
-/* ============================================================ PAGE NAV ============================================================ */
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -957,7 +947,6 @@ function showPage(id){
 }
 function goToClientPage(){ showPage('pageClient'); }
 
-/* ============================================================ LOGIN ============================================================ */
 let currentPro = null;
 
 function openLogin(){
@@ -981,7 +970,6 @@ function doLogin(){
   openProPage();
 }
 
-/* ============================================================ PRO PAGE ============================================================ */
 let proCalY=0,proCalM=0,proActiveSvc='',proSelectedDayKey='';
 
 function proSwitchTab(tab,el){
@@ -1185,7 +1173,6 @@ function proCancelBooking(bookingId,dateKey,slot){
   proOpenDay(d.getFullYear(),d.getMonth(),d.getDate(),dateKey);
 }
 
-/* ============================================================ PRO SCHEDULE ============================================================ */
 function proRenderSchedule(){
   if(!currentPro) return;
   const sched=proSchedules[currentPro.key];
@@ -1286,11 +1273,9 @@ function proRemoveBlock(idx){
   proRenderBlockedList();
 }
 
-/* ============================================================ ADMIN ============================================================ */
 const adminTitles={dashboard:'Dashboard',turnos:'Turnos',clientes:'Clientes',servicios:'Servicios'};
 function showAdminSection(name,el){ document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); document.getElementById('as-'+name).classList.add('active'); el.classList.add('active'); document.getElementById('adminPageTitle').textContent=adminTitles[name]; }
 
-/* ============================================================ CLIENT BOOKING STATE ============================================================ */
 const cs={nombre:'',apellido:'',tel:'',email:'',categoria:'',servicios:[],selDay:null,selSlot:null,calY:0,calM:0,lastBookingId:null};
 
 function cSetStep(n){
@@ -1535,7 +1520,6 @@ function cReset(){
   document.getElementById('clientProgress').style.display='';
 }
 
-/* ============================================================ CANCELLATION ALERT - NOTIFICACIÓN BIDIRECCIONAL ============================================================ */
 function showCancelAlert(booking, cancelledBy){
   const d=new Date(booking.dateKey+'T12:00:00');
   const dateStr=`${DAY_NAMES[d.getDay()]} ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
@@ -1560,7 +1544,6 @@ function closeCancelAlert(){
   document.getElementById('cancelAlert').classList.remove('open'); 
 }
 
-/* ============================================================ TOAST ============================================================ */
 function showToast(title,body,icon='🔔'){
   document.getElementById('toastTitle').textContent=title;
   document.getElementById('toastBody').textContent=body;
