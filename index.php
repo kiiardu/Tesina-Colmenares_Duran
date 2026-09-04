@@ -1,7 +1,3 @@
-<?php
-echo "PHP FUNCIONA";
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
