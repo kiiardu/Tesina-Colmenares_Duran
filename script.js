@@ -661,7 +661,7 @@ async function cConfirm(){
     slot: cs.selSlot,
     nombre: cs.nombre + ' ' + cs.apellido.charAt(0) + '.',
     servicio: names,
-    svcCat: cs.servicio,
+    svcCat: cs.servicio || cs.categoria,
     status: 'confirmed'
   });
 
