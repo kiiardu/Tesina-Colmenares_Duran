@@ -458,33 +458,311 @@ function cSetStep(n){
 function cGoBack(to){ cSetStep(to); }
 
 function cGoStep2(){
-  const n=document.getElementById('cNombre').value.trim();
-  const a=document.getElementById('cApellido').value.trim();
-  const t=document.getElementById('cTel').value.trim();
-  if(!n||!a||!t){alert('Por favor completá nombre, apellido y teléfono.');return;}
-  cs.nombre=n;cs.apellido=a;cs.tel=t;cs.email=document.getElementById('cEmail').value.trim();
+
+  const n = document.getElementById('cNombre').value.trim();
+  const a = document.getElementById('cApellido').value.trim();
+  const t = document.getElementById('cTel').value.trim();
+  const e = document.getElementById('cEmail').value.trim();
+
+  // Limpiar mensaje anterior
+  const oldMsg = document.getElementById('cFormError');
+  if(oldMsg) oldMsg.remove();
+
+  let error = '';
+
+  // Nombre y apellido: solo letras, espacios y acentos
+  const nombreValido = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s'-]{2,}$/.test(n);
+  const apellidoValido = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s'-]{2,}$/.test(a);
+
+  if(!nombreValido){
+    error = 'Ingresá un nombre válido.';
+  }
+  else if(!apellidoValido){
+    error = 'Ingresá un apellido válido.';
+  }
+
+  else if(!esTelefonoArgentino(t)){
+    error = 'Ingresá un número de teléfono válido.';
+  }
+
+  // Email opcional, pero si se completa debe tener formato válido
+  else if(e && !esEmailValido(e)){
+    error = 'Ingresá un email válido. Ejemplo: nombre@gmail.com';
+  }
+
+  // Mostrar error sin alert
+  if(error){
+    const msg = document.createElement('div');
+    msg.id = 'cFormError';
+    msg.className = 'c-form-error';
+    msg.textContent = error;
+
+    document.querySelector('#cs1 .c-form-body').appendChild(msg);
+
+    return;
+  }
+
+  // Datos válidos
+  cs.nombre = n;
+  cs.apellido = a;
+  cs.tel = t;
+  cs.email = e;
+
   cSetStep(2);
 }
 
+function esTelefonoArgentino(tel){
+
+  // Sacamos espacios, guiones, paréntesis y puntos
+  const limpio = tel.replace(/[\s().-]/g,'');
+
+  return /^(\+?54?9?|0)?[1-9]\d{8,10}$/.test(limpio);
+}
+
+
+function esEmailValido(email){
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+
+}
+
 function cGoStep3(cat){
-  cs.categoria=cat;
-  if(cs.categoria!==cat) cs.servicios=[];
-  const data=SERVICES[cat];
-  document.getElementById('cServTitle').textContent=data.title;
-  document.getElementById('cServSub').textContent=data.sub;
-  const list=document.getElementById('cServList');
-  list.innerHTML='';
-  data.items.forEach(s=>{
-    const isSelected=cs.servicios.some(sel=>sel.id===s.id);
-    const el=document.createElement('div');
-    el.className='service-item'+(isSelected?' selected':'');
-    el.id='csvc-'+s.id;
-    el.innerHTML=`<div class="service-info"><div class="service-name">${s.name}</div><div class="service-meta">⏱ ${s.dur}</div></div><div class="service-price">${fmt$(s.price)}</div><div class="service-check">✓</div>`;
-    el.onclick=()=>cToggleService(s,el);
+
+  const cambioCategoria = cs.categoria !== cat;
+
+  if(cambioCategoria){
+    cs.servicios = [];
+  }
+
+  cs.categoria = cat;
+
+  const data = SERVICES[cat];
+
+  document.getElementById('cServTitle').textContent = data.title;
+  document.getElementById('cServSub').textContent = data.sub;
+
+  const list = document.getElementById('cServList');
+
+  list.innerHTML = '';
+
+
+  /* Imágenes de ejemplo por categoría */
+
+  const serviceImages = {
+
+    peluqueria: [
+      'peluqueria.jpg',
+      'peluqueria2.jpg',
+      'peluqueria3.jpg'
+    ],
+
+    manicuria: [
+      'manicura.jpg',
+      'manicura2.jpg',
+      'manicura3.jpg'
+    ],
+
+    maquillaje: [
+      'maquillaje.jpg',
+      'maquillaje2.jpg',
+      'maquillaje3.jpg'
+    ],
+
+    dermatologia: [
+      'dermatologia.jpg',
+      'dermatologia2.jpg',
+      'dermatologia3.jpg'
+    ],
+
+    lashista: [
+      'lashista.jpg',
+      'lashista2.jpg',
+      'lashista3.jpg'
+    ]
+
+  };
+
+
+  data.items.forEach(s => {
+
+    const isSelected =
+      cs.servicios.some(sel => sel.id === s.id);
+
+    const images = serviceImages[cat];
+
+    const el = document.createElement('div');
+
+    el.className =
+      'service-item' +
+      (isSelected ? ' selected' : '');
+
+    el.id = 'csvc-' + s.id;
+
+
+    /* Carrusel */
+
+    let imagesHTML = '';
+
+    images.forEach((img, index) => {
+
+      imagesHTML += `
+        <img
+          src="${img}"
+          class="${index === 0 ? 'active' : ''}"
+          alt="${data.label}"
+        >
+      `;
+
+    });
+
+
+    let dotsHTML = '';
+
+    images.forEach((img, index) => {
+
+      dotsHTML += `
+        <span
+          class="carousel-dot ${index === 0 ? 'active' : ''}"
+        ></span>
+      `;
+
+    });
+
+
+    el.innerHTML = `
+
+      <div
+        class="service-carousel"
+        data-current="0"
+      >
+
+        ${imagesHTML}
+
+        <button
+          class="carousel-prev"
+          onclick="event.stopPropagation(); serviceMove(this,-1)"
+        >
+          ‹
+        </button>
+
+        <button
+          class="carousel-next"
+          onclick="event.stopPropagation(); serviceMove(this,1)"
+        >
+          ›
+        </button>
+
+        <div class="carousel-dots">
+          ${dotsHTML}
+        </div>
+
+      </div>
+
+
+      <div class="service-info">
+
+        <div class="service-name">
+          ${s.name}
+        </div>
+
+        <div class="service-meta">
+          ⏱ ${s.durMin} min
+        </div>
+
+      </div>
+
+
+      <div class="service-price">
+        ${fmt$(s.price)}
+      </div>
+
+
+      <div class="service-check">
+        ✓
+      </div>
+
+    `;
+
+
+    /* Click en la tarjeta */
+
+    el.onclick = () => cToggleService(s, el);
+
+
+    /* Click en los puntitos */
+
+    const dots =
+      el.querySelectorAll('.carousel-dot');
+
+    dots.forEach((dot, index) => {
+
+      dot.onclick = function(e){
+
+        e.stopPropagation();
+
+        const carousel =
+          el.querySelector('.service-carousel');
+
+        updateServiceCarousel(
+          carousel,
+          index
+        );
+
+      };
+
+    });
+
+
     list.appendChild(el);
+
   });
+
+
   cUpdateSelectedBar();
+
   cSetStep(3);
+}
+
+function updateServiceCarousel(carousel, index){
+
+  const images = carousel.querySelectorAll('img');
+  const dots = carousel.querySelectorAll('.carousel-dot');
+
+  images.forEach((img, i) => {
+    img.classList.toggle('active', i === index);
+  });
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+
+  carousel.dataset.current = index;
+}
+
+
+function serviceMove(button, direction){
+
+  const carousel = button.closest('.service-carousel');
+
+  if(!carousel) return;
+
+  const images = carousel.querySelectorAll('img');
+
+  if(images.length === 0) return;
+
+  let current = Number(carousel.dataset.current || 0);
+
+  current += direction;
+
+  if(current < 0){
+    current = images.length - 1;
+  }
+
+  if(current >= images.length){
+    current = 0;
+  }
+
+  updateServiceCarousel(carousel, current);
 }
 
 function cToggleService(s,el){
@@ -587,17 +865,55 @@ function cSelectDay(y,m,d){
 function allSlots(){ const s=[]; for(let h=8;h<20;h++){s.push(`${p(h)}:00`);s.push(`${p(h)}:30`);} return s; }
 
 function cRenderSlots(){
-  const grid=document.getElementById('cSlotsGrid');grid.innerHTML='';
+  const grid=document.getElementById('cSlotsGrid');
+  grid.innerHTML='';
+
   const dateKey=fd(cs.selDay);
-  allSlots().forEach(slot=>{
+
+  // Buscar la profesional correspondiente a la categoría
+  const proKey=Object.keys(PROFESSIONALS).find(k =>
+    PROFESSIONALS[k].services.includes(cs.categoria)
+  );
+
+  // Si no encontramos profesional, no mostramos horarios
+  if(!proKey) return;
+
+  const schedule=proSchedules[proKey];
+  const dayConfig=schedule[cs.selDay.getDay()];
+
+  // Si la profesional no trabaja ese día
+  if(!dayConfig || !dayConfig.on){
+    const notice=document.createElement('div');
+    notice.style.cssText='padding:18px;text-align:center;color:var(--ink-light);font-size:13px;';
+    notice.textContent='No hay horarios disponibles para este día.';
+    grid.appendChild(notice);
+    return;
+  }
+
+  const [sh,sm]=dayConfig.start.split(':').map(Number);
+  const [eh,em]=dayConfig.end.split(':').map(Number);
+
+  const startMin=sh*60+sm;
+  const endMin=eh*60+em;
+
+  for(let min=startMin;min<endMin;min+=30){
+
+    const slot=`${p(Math.floor(min/60))}:${p(min%60)}`;
+
     const key=`${dateKey}|${slot}`;
     const taken=bookedSlots.has(key);
+
     const el=document.createElement('div');
+
     el.className='slot'+(taken?' taken':'');
     el.textContent=slot;
-    if(!taken) el.onclick=()=>cSelectSlot(slot,el);
+
+    if(!taken){
+      el.onclick=()=>cSelectSlot(slot,el);
+    }
+
     grid.appendChild(el);
-  });
+  }
 }
 
 function cSelectSlot(slot,el){

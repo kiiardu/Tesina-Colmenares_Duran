@@ -759,3 +759,1464 @@ body.dark-mode .l-input {
   color: #f5f1ed !important;
   border-color: rgba(222,184,188,.2) !important;
 }
+
+/* ============================================================
+   PANTALLAS 2 Y 3 - CATEGORÍAS Y SERVICIOS
+   DISEÑO RESPONSIVE DANDELION
+   ============================================================ */
+
+/* Contenedor más ancho para mostrar 2 columnas en PC */
+.client-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* La pantalla de datos y calendario siguen siendo más angostas */
+#cs1 .c-card,
+#cs4 .c-card,
+#cs5 .c-card {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   PANTALLA 2 - CATEGORÍAS
+   ============================================================ */
+
+#cs2 .c-card {
+  width: 100%;
+}
+
+#cs2 .cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 10px 24px 28px;
+}
+
+
+/* Tarjeta de categoría */
+
+#cs2 .cat-btn {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: 1fr auto;
+
+  min-height: 150px;
+  padding: 0;
+
+  background: var(--rose-pale);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+/* Imagen de categoría */
+
+#cs2 .cat-img {
+  width: 150px;
+  height: 150px;
+
+  grid-row: 1 / 3;
+
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Nombre */
+
+#cs2 .cat-name {
+  align-self: end;
+
+  margin: 0;
+  padding: 18px 18px 4px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 500;
+
+  color: var(--ink);
+}
+
+
+/* Descripción */
+
+#cs2 .cat-desc {
+  align-self: start;
+
+  margin: 0;
+  padding: 0 18px 18px;
+
+  font-size: 11.5px;
+  line-height: 1.45;
+
+  color: var(--ink-light);
+}
+
+
+/* Efecto al pasar el mouse */
+
+#cs2 .cat-btn:hover {
+  border-color: var(--rose);
+  background: var(--rose-pale);
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(203,147,152,0.20);
+}
+
+
+/* ============================================================
+   PANTALLA 3 - SERVICIOS
+   ============================================================ */
+
+#cs3 .c-card {
+  width: 100%;
+}
+
+
+/* Dos columnas en computadora */
+
+#cs3 .service-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  padding: 10px 24px 24px;
+}
+
+
+/* Tarjeta de servicio */
+
+#cs3 .service-item {
+  position: relative;
+
+  display: flex;
+  align-items: stretch;
+
+  min-height: 150px;
+  padding: 0;
+
+  background: var(--rose-pale);
+
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+
+/* Imagen */
+
+#cs3 .service-thumb {
+  width: 150px;
+  min-width: 150px;
+  height: 150px;
+
+  overflow: hidden;
+}
+
+
+#cs3 .service-thumb img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  display: block;
+
+  transition: transform 0.3s ease;
+}
+
+
+/* Información */
+
+#cs3 .service-info {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 20px 70px 20px 18px;
+
+  min-width: 0;
+}
+
+
+/* Nombre del servicio */
+
+#cs3 .service-name {
+  font-size: 15px;
+  line-height: 1.3;
+
+  margin-bottom: 7px;
+
+  color: var(--ink);
+  font-weight: 500;
+}
+
+
+/* Duración */
+
+#cs3 .service-meta {
+  font-size: 11.5px;
+  color: var(--ink-light);
+}
+
+
+/* Precio */
+
+#cs3 .service-price {
+  position: absolute;
+
+  right: 18px;
+  bottom: 15px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+
+  color: var(--rose-dark);
+
+  white-space: nowrap;
+}
+
+
+/* Círculo de selección */
+
+#cs3 .service-check {
+  position: absolute;
+
+  top: 12px;
+  right: 13px;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 50%;
+
+  border: 2px solid var(--border);
+
+  background: var(--white);
+
+  color: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 12px;
+
+  transition: all 0.2s ease;
+}
+
+
+/* Hover */
+
+#cs3 .service-item:hover {
+  border-color: var(--rose);
+
+  background: var(--rose-pale);
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(203,147,152,0.18);
+}
+
+
+#cs3 .service-item:hover .service-thumb img {
+  transform: scale(1.05);
+}
+
+
+/* Servicio seleccionado */
+
+#cs3 .service-item.selected {
+  border-color: var(--rose-dark);
+
+  background: var(--rose-pale);
+
+  box-shadow:
+    0 0 0 3px rgba(203,147,152,0.15);
+}
+
+
+#cs3 .service-item.selected .service-check {
+  background: var(--rose);
+  border-color: var(--rose);
+
+  color: white;
+}
+
+
+/* ============================================================
+   MODO OSCURO
+   ============================================================ */
+
+/* Las variables de body.dark-mode que ya tiene la tesina
+   se encargan de los colores generales. Estas reglas
+   solamente ajustan las tarjetas e imágenes. */
+
+body.dark-mode #cs2 .cat-btn,
+body.dark-mode #cs3 .service-item {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+
+body.dark-mode #cs2 .cat-btn:hover,
+body.dark-mode #cs3 .service-item:hover {
+  background: var(--rose-pale);
+  border-color: var(--rose);
+}
+
+
+body.dark-mode #cs3 .service-check {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+
+body.dark-mode #cs3 .service-item.selected .service-check {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: white;
+}
+
+
+/* Oscurecemos un poquito las fotos para que combinen
+   con el modo oscuro */
+
+body.dark-mode #cs2 .cat-img,
+body.dark-mode #cs3 .service-thumb img {
+  filter: brightness(0.78);
+}
+
+
+/* ============================================================
+   CELULARES
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* Contenedor */
+  .client-container {
+    width: 100%;
+    max-width: 100%;
+
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 50px;
+  }
+
+
+  /* ----------------------------------------------------------
+     CATEGORÍAS
+     ---------------------------------------------------------- */
+
+  #cs2 .cat-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    padding: 8px 12px 24px;
+  }
+
+
+  #cs2 .cat-btn {
+    grid-template-columns: 105px 1fr;
+
+    min-height: 115px;
+
+    border-radius: 14px;
+  }
+
+
+  #cs2 .cat-img {
+    width: 105px;
+    height: 115px;
+  }
+
+
+  #cs2 .cat-name {
+    font-size: 19px;
+
+    padding: 15px 14px 3px;
+  }
+
+
+  #cs2 .cat-desc {
+    font-size: 10.5px;
+
+    padding: 0 14px 14px;
+  }
+
+
+  /* ----------------------------------------------------------
+     SERVICIOS
+     ---------------------------------------------------------- */
+
+  #cs3 .service-list {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    padding: 8px 12px 24px;
+  }
+
+
+  #cs3 .service-item {
+    min-height: 120px;
+
+    border-radius: 14px;
+  }
+
+
+  #cs3 .service-thumb {
+    width: 105px;
+    min-width: 105px;
+    height: 120px;
+  }
+
+
+  #cs3 .service-info {
+    padding: 16px 55px 16px 14px;
+  }
+
+
+  #cs3 .service-name {
+    font-size: 14px;
+  }
+
+
+  #cs3 .service-meta {
+    font-size: 10.5px;
+  }
+
+
+  #cs3 .service-price {
+    right: 14px;
+    bottom: 12px;
+
+    font-size: 18px;
+  }
+
+
+  #cs3 .service-check {
+    width: 23px;
+    height: 23px;
+
+    top: 10px;
+    right: 10px;
+  }
+
+
+  /* Textos superiores */
+  #cs2 .c-card-title,
+  #cs3 .c-card-title {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  #cs2 .c-card-sub,
+  #cs3 .c-card-sub {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+
+  /* Barra de servicios seleccionados */
+  #cs3 .selected-services-bar {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
+
+/* ============================================================
+   CARRUSEL DE CATEGORÍAS
+   ============================================================ */
+
+.cat-btn {
+  display: flex !important;
+  flex-direction: column;
+
+  padding: 0 !important;
+  overflow: hidden;
+
+  min-height: 250px;
+}
+
+
+/* Carrusel */
+
+.cat-carousel {
+  position: relative;
+
+  width: 100%;
+  height: 150px;
+
+  overflow: hidden;
+}
+
+
+/* Fotos */
+
+.cat-carousel .cat-img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0;
+
+  transition: opacity .35s ease;
+}
+
+
+.cat-carousel .cat-img.active {
+  opacity: 1;
+}
+
+
+/* Flechas */
+
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 30px;
+  height: 30px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.82);
+
+  color: #2e2420;
+
+  font-size: 25px;
+  line-height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 5;
+
+  transition: .2s ease;
+}
+
+
+.carousel-prev {
+  left: 10px;
+}
+
+
+.carousel-next {
+  right: 10px;
+}
+
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: white;
+
+  transform: translateY(-50%) scale(1.08);
+}
+
+
+/* Puntitos */
+
+.carousel-dots {
+  position: absolute;
+
+  left: 50%;
+  bottom: 9px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 5px;
+
+  z-index: 5;
+}
+
+
+.carousel-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.65);
+
+  transition: .2s ease;
+}
+
+
+.carousel-dot.active {
+  background: white;
+
+  transform: scale(1.25);
+}
+
+
+/* ============================================================
+   INFORMACIÓN DE CATEGORÍA
+   ============================================================ */
+
+.cat-info {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+
+  padding: 12px 18px 16px;
+
+  min-height: 82px;
+}
+
+
+#cs2 .cat-name {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 23px !important;
+
+  font-weight: 600 !important;
+
+  font-style: italic;
+
+  line-height: 1.15;
+
+  color: var(--ink);
+}
+
+
+#cs2 .cat-desc {
+  margin: 5px 0 0 !important;
+  padding: 0 !important;
+
+  font-size: 11.5px;
+
+  line-height: 1.4;
+
+  color: var(--ink-light);
+}
+
+
+/* ============================================================
+   CARRUSEL DE SERVICIOS
+   ============================================================ */
+
+.service-carousel {
+  position: relative;
+
+  width: 150px;
+  min-width: 150px;
+
+  height: 150px;
+
+  overflow: hidden;
+}
+
+
+.service-carousel img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0;
+
+  transition: opacity .35s ease;
+}
+
+
+.service-carousel img.active {
+  opacity: 1;
+}
+
+
+/* Flechas de servicios */
+
+.service-carousel .carousel-prev,
+.service-carousel .carousel-next {
+  width: 25px;
+  height: 25px;
+
+  font-size: 20px;
+}
+
+
+.service-carousel .carousel-prev {
+  left: 7px;
+}
+
+
+.service-carousel .carousel-next {
+  right: 7px;
+}
+
+
+/* ============================================================
+   CELULAR
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .cat-carousel {
+    height: 130px;
+  }
+
+
+  .cat-btn {
+    min-height: 220px;
+  }
+
+
+  #cs2 .cat-name {
+    font-size: 21px !important;
+  }
+
+
+  #cs2 .cat-desc {
+    font-size: 10.5px;
+  }
+
+
+  .carousel-prev,
+  .carousel-next {
+    width: 28px;
+    height: 28px;
+
+    font-size: 23px;
+  }
+
+
+  .service-carousel {
+    width: 105px;
+    min-width: 105px;
+
+    height: 120px;
+  }
+
+}
+
+/* ============================================================
+   CATEGORÍAS - MISMO ESTILO QUE SERVICIOS
+   ============================================================ */
+
+#cs2 .cat-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+}
+
+
+/* TARJETA */
+
+#cs2 .cat-btn {
+    position: relative !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+
+    width: 100% !important;
+    min-height: 150px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    overflow: hidden !important;
+
+    text-align: left !important;
+
+    border-radius: 16px !important;
+
+    cursor: pointer !important;
+}
+
+
+/* ============================================================
+   CARRUSEL
+   ============================================================ */
+
+#cs2 .cat-carousel {
+    position: relative !important;
+
+    width: 150px !important;
+    min-width: 150px !important;
+    height: 150px !important;
+
+    flex-shrink: 0 !important;
+
+    overflow: hidden !important;
+}
+
+
+/* IMÁGENES */
+
+#cs2 .cat-carousel .cat-img {
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    object-fit: cover !important;
+
+    opacity: 0 !important;
+
+    transition: opacity .3s ease !important;
+}
+
+
+#cs2 .cat-carousel .cat-img.active {
+    opacity: 1 !important;
+}
+
+
+/* ============================================================
+   FLECHAS
+   ============================================================ */
+
+#cs2 .cat-carousel .carousel-prev,
+#cs2 .cat-carousel .carousel-next {
+
+    position: absolute !important;
+
+    top: 50% !important;
+
+    transform: translateY(-50%) !important;
+
+    z-index: 5 !important;
+
+    width: 29px !important;
+    height: 29px !important;
+
+    padding: 0 !important;
+
+    border: none !important;
+    border-radius: 50% !important;
+
+    background: rgba(255,255,255,.90) !important;
+
+    color: #3b302c !important;
+
+    font-size: 22px !important;
+    line-height: 1 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    cursor: pointer !important;
+}
+
+
+#cs2 .cat-carousel .carousel-prev {
+    left: 7px !important;
+}
+
+
+#cs2 .cat-carousel .carousel-next {
+    right: 7px !important;
+}
+
+
+/* ============================================================
+   PUNTITOS
+   ============================================================ */
+
+#cs2 .cat-carousel .carousel-dots {
+
+    position: absolute !important;
+
+    bottom: 7px !important;
+    left: 50% !important;
+
+    transform: translateX(-50%) !important;
+
+    z-index: 5 !important;
+
+    display: flex !important;
+
+    gap: 4px !important;
+}
+
+
+#cs2 .cat-carousel .carousel-dot {
+
+    width: 6px !important;
+    height: 6px !important;
+
+    padding: 0 !important;
+
+    border-radius: 50% !important;
+
+    background: rgba(255,255,255,.65) !important;
+}
+
+
+#cs2 .cat-carousel .carousel-dot.active {
+    background: white !important;
+
+    transform: scale(1.25) !important;
+}
+
+
+/* ============================================================
+   INFORMACIÓN
+   ============================================================ */
+
+#cs2 .cat-info {
+
+    display: flex !important;
+
+    flex: 1 !important;
+
+    flex-direction: column !important;
+
+    justify-content: center !important;
+
+    align-items: flex-start !important;
+
+    min-width: 0 !important;
+
+    padding: 16px 17px !important;
+
+    text-align: left !important;
+}
+
+
+/* TÍTULO */
+
+#cs2 .cat-name {
+
+    width: 100% !important;
+
+    margin: 0 0 6px 0 !important;
+    padding: 0 !important;
+
+    font-family: 'Cormorant Garamond', serif !important;
+
+    font-size: 24px !important;
+
+    font-weight: 600 !important;
+
+    font-style: italic !important;
+
+    line-height: 1.1 !important;
+
+    text-align: left !important;
+
+    color: var(--ink) !important;
+}
+
+
+/* DESCRIPCIÓN */
+
+#cs2 .cat-desc {
+
+    width: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 11px !important;
+
+    line-height: 1.4 !important;
+
+    text-align: left !important;
+
+    color: var(--ink-light) !important;
+}
+
+
+/* ============================================================
+   MODO OSCURO
+   ============================================================ */
+
+body.dark-mode #cs2 .cat-btn {
+    background: var(--card) !important;
+    border-color: var(--border) !important;
+}
+
+
+body.dark-mode #cs2 .cat-name {
+    color: var(--ink) !important;
+}
+
+
+body.dark-mode #cs2 .cat-desc {
+    color: var(--ink-light) !important;
+}
+
+
+/* ============================================================
+   CELULAR
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    #cs2 .cat-grid {
+        grid-template-columns: 1fr !important;
+
+        gap: 14px !important;
+    }
+
+
+    #cs2 .cat-btn {
+
+        min-height: 125px !important;
+
+        border-radius: 14px !important;
+    }
+
+
+    #cs2 .cat-carousel {
+
+        width: 120px !important;
+        min-width: 120px !important;
+
+        height: 125px !important;
+    }
+
+
+    #cs2 .cat-info {
+
+        padding: 13px 14px !important;
+    }
+
+
+    #cs2 .cat-name {
+
+        font-size: 21px !important;
+
+        margin-bottom: 5px !important;
+    }
+
+
+    #cs2 .cat-desc {
+
+        font-size: 10px !important;
+
+        line-height: 1.35 !important;
+    }
+
+
+    #cs2 .cat-carousel .carousel-prev,
+    #cs2 .cat-carousel .carousel-next {
+
+        width: 27px !important;
+        height: 27px !important;
+
+        font-size: 20px !important;
+    }
+
+}
+
+/* ============================================================
+   CATEGORÍAS SIN CARRUSEL
+   ============================================================ */
+
+#cs2 .cat-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    padding: 10px 24px 26px !important;
+}
+
+#cs2 .cat-btn {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-height: 150px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    text-align: left !important;
+    border-radius: 16px !important;
+    cursor: pointer !important;
+}
+
+#cs2 .cat-image {
+    width: 150px !important;
+    min-width: 150px !important;
+    height: 150px !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+}
+
+#cs2 .cat-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+#cs2 .cat-info {
+    display: flex !important;
+    flex: 1 !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    min-width: 0 !important;
+    padding: 16px 17px !important;
+    text-align: left !important;
+}
+
+#cs2 .cat-name {
+    width: 100% !important;
+    margin: 0 0 6px 0 !important;
+    padding: 0 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+    line-height: 1.1 !important;
+    text-align: left !important;
+    color: var(--ink) !important;
+}
+
+#cs2 .cat-desc {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    text-align: left !important;
+    color: var(--ink-light) !important;
+}
+
+body.dark-mode #cs2 .cat-btn {
+    background: var(--card) !important;
+    border-color: var(--border) !important;
+}
+
+body.dark-mode #cs2 .cat-name {
+    color: var(--ink) !important;
+}
+
+body.dark-mode #cs2 .cat-desc {
+    color: var(--ink-light) !important;
+}
+
+
+/* CELULAR */
+@media (max-width: 768px) {
+
+    #cs2 .cat-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    #cs2 .cat-btn {
+        min-height: 125px !important;
+        border-radius: 14px !important;
+    }
+
+    #cs2 .cat-image {
+        width: 120px !important;
+        min-width: 120px !important;
+        height: 125px !important;
+    }
+
+    #cs2 .cat-info {
+        padding: 13px 14px !important;
+    }
+
+    #cs2 .cat-name {
+        font-size: 21px !important;
+        margin-bottom: 5px !important;
+    }
+
+    #cs2 .cat-desc {
+        font-size: 10px !important;
+        line-height: 1.35 !important;
+    }
+}
+
+/* ============================================================
+   VOLVER Y SALIR — MÁS VISIBLES
+   ============================================================ */
+
+.c-back-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    padding: 9px 14px !important;
+    margin-bottom: 14px !important;
+    border: 1.5px solid var(--rose) !important;
+    border-radius: 10px !important;
+    background: var(--rose-pale) !important;
+    color: var(--rose-dark) !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.c-back-link:hover {
+    background: var(--rose-light) !important;
+    color: var(--ink) !important;
+    transform: translateY(-1px) !important;
+}
+
+
+/* SALIR DE PROFESIONALES */
+
+.pro-logout {
+    padding: 8px 14px !important;
+    border: 1.5px solid var(--rose-light) !important;
+    border-radius: 9px !important;
+    background: rgba(222,184,188,0.12) !important;
+    color: var(--cream) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.pro-logout:hover {
+    background: var(--rose-light) !important;
+    color: var(--ink) !important;
+    transform: translateY(-1px) !important;
+}
+
+
+/* MODO OSCURO */
+
+body.dark-mode .c-back-link {
+    background: var(--card) !important;
+    border-color: var(--rose-light) !important;
+    color: var(--rose-light) !important;
+}
+
+body.dark-mode .pro-logout {
+    background: rgba(222,184,188,0.15) !important;
+    border-color: var(--rose-light) !important;
+    color: var(--rose-light) !important;
+}
+
+/* ============================================================
+   FOOTER DANDELION — MINIMALISTA
+   ============================================================ */
+
+.site-footer {
+    width: 100%;
+    margin-top: 55px;
+    padding: 48px 30px 22px;
+    background: var(--rose-pale);
+    border-top: 1px solid var(--rose-light);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.footer-tagline {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--ink-light);
+}
+
+.footer-line {
+    width: 55px;
+    height: 1px;
+    margin: 25px auto;
+    background: var(--rose);
+}
+
+.footer-info {
+    max-width: 850px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: var(--ink-light);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.footer-label {
+    margin-bottom: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--rose-dark);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+}
+
+.footer-socials a {
+    color: var(--ink-light);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s ease;
+}
+
+.footer-socials a:hover {
+    color: var(--rose-dark);
+}
+
+.footer-bottom {
+    margin-top: 35px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(120, 90, 90, 0.15);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--ink-light);
+}
+
+
+/* DARK MODE */
+
+body.dark-mode .site-footer {
+    background: #211b1d;
+    border-top-color: var(--rose-light);
+}
+
+body.dark-mode .footer-logo {
+    color: var(--cream);
+}
+
+body.dark-mode .footer-tagline,
+body.dark-mode .footer-item,
+body.dark-mode .footer-socials a,
+body.dark-mode .footer-bottom {
+    color: rgba(255,255,255,0.65);
+}
+
+body.dark-mode .footer-label,
+body.dark-mode .footer-socials a:hover {
+    color: var(--rose-light);
+}
+
+
+/* CELULAR */
+
+@media (max-width: 768px) {
+
+    .site-footer {
+        margin-top: 40px;
+        padding: 38px 20px 20px;
+    }
+
+    .footer-logo {
+        font-size: 34px;
+    }
+
+    .footer-info {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .footer-bottom {
+        margin-top: 28px;
+    }
+}
+
+/* ============================================================
+   ERROR DEL FORMULARIO
+   ============================================================ */
+
+.c-form-error {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 12px;
+    padding: 10px 13px;
+    border: 1px solid rgba(180, 90, 100, 0.25);
+    border-radius: 9px;
+    background: rgba(180, 90, 100, 0.07);
+    color: #9b5d64;
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: left;
+    animation: formErrorIn 0.2s ease;
+}
+
+@keyframes formErrorIn {
+    from {
+        opacity: 0;
+        transform: translateY(-3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.dark-mode .c-form-error {
+    background: rgba(222, 184, 188, 0.08);
+    border-color: rgba(222, 184, 188, 0.25);
+    color: var(--rose-light);
+}

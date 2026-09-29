@@ -191,32 +191,68 @@
         <div class="c-card-title">¿Qué servicio necesitás?</div>
         <div class="c-card-sub">Elegí el rubro y luego podés seleccionar varios servicios.</div>
         <div class="cat-grid">
-          <div class="cat-btn" onclick="cGoStep3('peluqueria')">
-            <img class="cat-img" src="peluqueria.jpg" alt="Peluquería">
-            <div class="cat-name">Peluquería</div>
-            <div class="cat-desc">Vero y Aide — mechas, color, peinados</div>
-          </div>
-          <div class="cat-btn" onclick="cGoStep3('manicuria')">
-            <img class="cat-img" src="manicura.jpg" alt="Manicuría">
-            <div class="cat-name">Manicuría</div>
-            <div class="cat-desc">Micaela — semipermanente, capping, soft gel</div>
-          </div>
-          <div class="cat-btn" onclick="cGoStep3('maquillaje')">
-            <img class="cat-img" src="maquillaje.jpg" alt="Maquillaje">
-            <div class="cat-name">Maquillaje</div>
-            <div class="cat-desc">Martina — social, novia, artístico</div>
-          </div>
-          <div class="cat-btn" onclick="cGoStep3('dermatologia')">
-            <img class="cat-img" src="dermatologia.jpg" alt="Dermatología">
-            <div class="cat-name">Dermatología</div>
-            <div class="cat-desc">Iara — combos de tratamientos faciales</div>
-          </div>
-          <div class="cat-btn" onclick="cGoStep3('lashista')">
-            <img class="cat-img" src="lashista.jpg" alt="Lashista">
-            <div class="cat-name">Lashista</div>
-            <div class="cat-desc">Martina — pestañas, cejas, combos</div>
-          </div>
-        </div>
+
+  <!-- PELUQUERÍA -->
+  <div class="cat-btn" onclick="cGoStep3('peluqueria')">
+    <div class="cat-image">
+      <img src="peluqueria.jpg" alt="Peluquería">
+    </div>
+
+    <div class="cat-info">
+      <div class="cat-name">Peluquería</div>
+      <div class="cat-desc">Vero y Aide — mechas, color, peinados</div>
+    </div>
+  </div>
+
+  <!-- MANICURÍA -->
+  <div class="cat-btn" onclick="cGoStep3('manicuria')">
+    <div class="cat-image">
+      <img src="manicura.jpg" alt="Manicuría">
+    </div>
+
+    <div class="cat-info">
+      <div class="cat-name">Manicuría</div>
+      <div class="cat-desc">Micaela — semipermanente, capping, soft gel</div>
+    </div>
+  </div>
+
+  <!-- MAQUILLAJE -->
+  <div class="cat-btn" onclick="cGoStep3('maquillaje')">
+    <div class="cat-image">
+      <img src="maquillaje.jpg" alt="Maquillaje">
+    </div>
+
+    <div class="cat-info">
+      <div class="cat-name">Maquillaje</div>
+      <div class="cat-desc">Martina — social, novia, artístico</div>
+    </div>
+  </div>
+
+  <!-- DERMATOLOGÍA -->
+  <div class="cat-btn" onclick="cGoStep3('dermatologia')">
+    <div class="cat-image">
+      <img src="dermatologia.jpg" alt="Dermatología">
+    </div>
+
+    <div class="cat-info">
+      <div class="cat-name">Dermatología</div>
+      <div class="cat-desc">Iara — combos de tratamientos faciales</div>
+    </div>
+  </div>
+
+  <!-- LASHISTA -->
+  <div class="cat-btn" onclick="cGoStep3('lashista')">
+    <div class="cat-image">
+      <img src="lashista.jpg" alt="Lashista">
+    </div>
+
+    <div class="cat-info">
+      <div class="cat-name">Lashista</div>
+      <div class="cat-desc">Martina — pestañas, cejas, combos</div>
+    </div>
+  </div>
+
+</div>
       </div>
     </div>
 
@@ -516,7 +552,45 @@
     </div>
   </div>
 </div>
+<footer class="site-footer">
 
+  <div class="footer-logo">Dandelion</div>
+
+  <p class="footer-tagline">
+    Belleza, cuidado y bienestar en un solo lugar.
+  </p>
+
+  <div class="footer-line"></div>
+
+  <div class="footer-info">
+
+    <div class="footer-item">
+      <span class="footer-label">VISITANOS</span>
+      <span>Felipe Varela 41-Río Tercero, Córdoba</span>
+    </div>
+
+    <div class="footer-item">
+      <span class="footer-label">CONTACTO</span>
+      <span>+54 9 3571 55-4285</span>
+      <span>berraveronica896@gmail.com</span>
+    </div>
+
+    <div class="footer-item">
+      <span class="footer-label">SEGUINOS</span>
+      <div class="footer-socials">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">TikTok</a>
+        <a href="#" target="_blank">Facebook</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Dandelion
+  </div>
+
+</footer>
 <script src="script.js"></script>
 </body>
 </html>
