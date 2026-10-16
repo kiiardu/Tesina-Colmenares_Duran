@@ -21,5 +21,5 @@ Dandelion Estética es una aplicación web desarrollada para optimizar la admini
 4. **Verificar la conexión:** Comprobar que los parámetros del archivo `conexion.php` coincidan con su credencial local de MySQL (`localhost`, usuario `root`, sin contraseña).
 5. **Ejecutar la aplicación:** Abrir el navegador e ingresar a `http://localhost/dandelion`.
 ## ESTADO DEL PROYECTO
-- **Terminado:** Módulo de autenticación (Login/Registro), roles y permisos, gestión de agenda para profesionales y panel básico de administración.
-- **En desarrollo / Mejoras futuras:** Mejora en la interfaz de reserva de turnos, recordatorios por WhatsApp/Email.
+- **Terminado:** Módulo de autenticación (Login/Registro), roles y permisos, interfaz de reserva de turnos, gestión de agenda para profesionales y panel básico de administración.
+- **En desarrollo / Mejoras futuras:** Recordatorios por WhatsApp/Email, añadir opción de Gift Card.
