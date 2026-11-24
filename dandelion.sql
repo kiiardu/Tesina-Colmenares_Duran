@@ -39,33 +39,6 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `nombre`, `apellido`, `telefono`, `email`) VALUES
-(1, '', '', '', ''),
-(2, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(3, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(4, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(5, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(6, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(7, 'Kiara', 'Durán', '3571552233', ''),
-(8, 'kiara', 'durán', '3571552233', ''),
-(9, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(10, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(11, 'Isabella', 'Quintero', '3571552233', ''),
-(12, 'Umma', 'Leyria', '3571552233', 'uchiapperoleyria@escuelasproa.edu.ar'),
-(13, 'Isabella', 'Quintero', '3571552233', ''),
-(14, 'Carolina', 'Basualdo', '3571552233', ''),
-(15, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(16, 'KIARA', 'Durán', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(17, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(18, 'Elsa', 'Olivero', '3571676775', ''),
-(19, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(20, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(21, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(22, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(23, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(24, 'Yazmin', 'Antun', '3571347343', ''),
-(25, 'KIARA', 'GAUNA', '3571552233', 'kdurangauna@escuelasproa.edu.ar'),
-(26, 'Silvina', 'Gauna', '3571690758', '');
 
 -- --------------------------------------------------------
 
@@ -157,37 +130,15 @@ CREATE TABLE `turnos` (
   `estado` varchar(30) DEFAULT NULL,
   `id_cliente` int(11) DEFAULT NULL,
   `id_profesional` int(11) DEFAULT NULL,
-  `id_servicio` int(11) DEFAULT NULL
+  `id_servicio` int(11) DEFAULT NULL,
+  `notas` text DEFAULT NULL,
+  `duracion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `turnos`
 --
 
-INSERT INTO `turnos` (`id_turno`, `fecha`, `hora`, `estado`, `id_cliente`, `id_profesional`, `id_servicio`) VALUES
-(1, '2026-06-26', '16:30:00', 'confirmado', 2, 1, 2),
-(2, '2026-06-26', '16:30:00', 'confirmado', 3, 1, 2),
-(3, '2026-06-26', '16:30:00', 'confirmado', 4, 1, 2),
-(4, '2026-06-26', '16:30:00', 'confirmado', 5, 1, 2),
-(5, '2026-06-26', '16:30:00', 'confirmado', 6, 1, 2),
-(6, '2026-06-25', '08:30:00', 'confirmado', 9, 1, 2),
-(7, '2026-07-01', '17:00:00', 'confirmado', 10, 1, 2),
-(8, '2026-07-10', '14:30:00', 'confirmado', 11, 1, 12),
-(9, '2026-06-25', '09:00:00', 'confirmado', 12, 1, 23),
-(10, '2026-06-25', '12:30:00', 'confirmado', 13, 1, 23),
-(11, '2026-06-23', '12:30:00', 'confirmado', 14, 1, 4),
-(12, '2026-06-25', '09:00:00', 'confirmado', 15, 1, 8),
-(13, '2026-06-30', '18:30:00', 'confirmado', 16, 1, 17),
-(14, '2026-09-17', '14:30:00', 'confirmado', 17, 1, 23),
-(15, '2026-07-02', '11:00:00', 'confirmado', 18, 1, 8),
-(16, '2026-07-16', '19:00:00', 'confirmado', 19, 1, 22),
-(17, '2026-08-18', '13:00:00', 'confirmado', 20, 1, 2),
-(18, '2026-08-01', '15:00:00', 'confirmado', 21, 1, 24),
-(19, '2026-08-27', '15:00:00', 'confirmado', 22, 1, 24),
-(20, '2026-07-01', '12:30:00', 'confirmado', 23, 1, 22),
-(21, '2026-07-01', '15:00:00', 'confirmado', 24, 1, 2),
-(22, '2026-06-30', '15:00:00', 'confirmado', 25, 1, 2),
-(23, '2026-07-31', '18:30:00', 'confirmado', 26, 1, 15);
 
 --
 -- Índices para tablas volcadas
@@ -229,7 +180,7 @@ ALTER TABLE `turnos`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `profesionales`
@@ -247,7 +198,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `turnos`
 --
 ALTER TABLE `turnos`
-  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_turno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restricciones para tablas volcadas

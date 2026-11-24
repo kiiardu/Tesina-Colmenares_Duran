@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dandelión Estética — Administración</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-sin-pie>
+
+<div class="page active" id="pageAdmin" style="flex-direction:row;">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-circle-sidebar">
+        <svg width="30" height="30" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 125 Q52 90 58 65" stroke="#deb8bc" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <line x1="58" y1="65" x2="58" y2="30" stroke="#deb8bc" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="82" y2="35" stroke="#deb8bc" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="88" y2="52" stroke="#deb8bc" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="85" y2="70" stroke="#deb8bc" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="35" y2="84" stroke="#deb8bc" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="28" y2="68" stroke="#deb8bc" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="30" y2="50" stroke="#deb8bc" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="58" cy="27" r="4" stroke="#deb8bc" stroke-width="1.5" fill="none"/>
+          <circle cx="83" cy="31" r="4" stroke="#deb8bc" stroke-width="1.5" fill="none"/>
+          <circle cx="90" cy="49" r="4" stroke="#deb8bc" stroke-width="1.5" fill="none"/>
+          <circle cx="87" cy="68" r="4" stroke="#deb8bc" stroke-width="1.5" fill="none"/>
+          <circle cx="33" cy="86" r="4" stroke="#deb8bc" stroke-width="1.5" fill="none"/>
+          <circle cx="24" cy="70" r="4" stroke="#deb8bc" stroke-width="1.5" fill="none"/>
+          <circle cx="26" cy="47" r="4" stroke="#deb8bc" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="sidebar-logo-text">
+        <div class="logo-name"></div>
+        <div class="logo-tag">Gestión de Estética</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <div class="nav-item active" onclick="showAdminSection('dashboard',this)">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke-width="2"/></svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" onclick="showAdminSection('turnos',this)">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><polyline points="12 7 12 12 15 15" stroke-width="2"/></svg>
+        <span>Turnos</span>
+      </div>
+      <div class="nav-section-label">Gestión</div>
+      <div class="nav-item" onclick="showAdminSection('clientes',this)">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke-width="2"/></svg>
+        <span>Clientes</span>
+      </div>
+      <div class="nav-item" onclick="showAdminSection('servicios',this)">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-width="2"/><path d="M2 17l10 5 10-5" stroke-width="2"/><path d="M2 12l10 5 10-5" stroke-width="2"/></svg>
+        <span>Servicios</span>
+      </div>
+    </nav>
+    <div class="portal-link" onclick="goToClientPage()">
+      <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-width="2"/><polyline points="15 3 21 3 21 9" stroke-width="2"/><line x1="10" y1="14" x2="21" y2="3" stroke-width="2"/></svg>
+      <span>Portal clientas</span>
+    </div>
+  </aside>
+  <div class="admin-main">
+    <header class="topbar">
+      <h1 class="page-title" id="adminPageTitle">Dashboard</h1>
+      <div class="topbar-right">
+        <button class="theme-btn" onclick="toggleTheme()"><img class="ico-img" src="imagenes/iconos Dandelion/luna.png" alt></button>
+        <button class="btn btn-primary" style="font-size:12px;padding:7px 14px;" onclick="goToClientPage()">🌼 Portal clientas</button>
+        <div class="avatar">A</div>
+      </div>
+    </header>
+    <div class="admin-content">
+      <div class="admin-section active" id="as-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-label">Turnos hoy</div><div class="stat-value" id="statHoy">0</div></div>
+          <div class="stat-card"><div class="stat-label">Próximos turnos</div><div class="stat-value" id="statProx">0</div></div>
+          <div class="stat-card"><div class="stat-label">Clientas</div><div class="stat-value" id="statClientas">0</div></div>
+          <div class="stat-card"><div class="stat-label">Cancelados</div><div class="stat-value" id="statCanc">0</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Turnos de hoy</span></div>
+          <div class="card-body">
+            <div class="appt-list" id="adminApptList"></div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-section" id="as-turnos">
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>#ID</th><th>Fecha y hora</th><th>Cliente</th><th>Servicio</th><th>Profesional</th><th>Estado</th></tr></thead>
+            <tbody id="adminTurnosTbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="admin-section" id="as-clientes">
+        <div class="card">
+          <table class="data-table">
+            <thead><tr><th>Nombre</th><th>Teléfono</th><th>Turnos</th><th>Último turno</th></tr></thead>
+            <tbody id="adminClientesTbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="admin-section" id="as-servicios">
+        <div id="catalogoRoot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="adm-modal" id="modalAdmin"><div class="adm-modal-box" id="modalAdminBox"></div></div>
+
+<script src="js/config.js"></script>
+<script src="js/estado.js"></script>
+<script src="js/componentes.js"></script>
+<script src="js/comunes.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

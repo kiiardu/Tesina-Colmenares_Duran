@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dandelión Estética — Elegí tu turno</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page active" id="pageClient">
+  <a href="inicio.html" class="home-btn" title="Volver al inicio"><img class="ico-img" src="imagenes/iconos Dandelion/casa.png" alt></a>
+  <button class="theme-btn" onclick="toggleTheme()"><img class="ico-img" src="imagenes/iconos Dandelion/luna.png" alt></button>
+  <div class="client-header">
+    <div class="client-brand-wrap" onclick="location.href='inicio.html'" style="cursor:pointer;" title="Volver al inicio">
+      <div class="logo-circle-lg" style="margin:0;">
+        <svg width="60" height="65" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 125 Q52 90 58 65" stroke="#cb9398" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <line x1="58" y1="65" x2="58" y2="28" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="83" y2="33" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="90" y2="51" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="87" y2="70" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="76" y2="86" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="34" y2="86" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="27" y2="69" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="29" y2="50" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="37" y2="32" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="58" cy="24" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="85" cy="29" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="92" cy="48" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="89" cy="68" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="78" cy="88" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="32" cy="88" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="23" cy="71" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="25" cy="47" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="35" cy="28" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+      <div class="client-brand-text">
+        <div class="brand">Dandelión</div>
+        <div class="brand-sub">Reservá tu turno</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress" id="clientProgress">
+    <div class="step done" id="cstep1"><div class="step-dot">1</div><div class="step-label">Datos</div></div>
+    <div class="step-line done" id="cline1"></div>
+    <div class="step done" id="cstep2"><div class="step-dot">2</div><div class="step-label">Categoría</div></div>
+    <div class="step-line done" id="cline2"></div>
+    <div class="step done" id="cstep3"><div class="step-dot">3</div><div class="step-label">Servicios</div></div>
+    <div class="step-line done" id="cline3"></div>
+    <div class="step active" id="cstep4"><div class="step-dot">4</div><div class="step-label">Turno</div></div>
+  </div>
+
+  <div class="client-container">
+
+    <!-- SCREEN 4: CALENDARIO -->
+    <div class="c-screen active" id="cs4">
+      <div class="c-back-link" onclick="location.href='servicios.html'">← Volver</div>
+      <div class="c-card">
+        <div class="c-card-title">Elegí tu turno</div>
+        <div class="pill" id="cSelectedPill"></div>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="cPrevMonth()">&#8249;</button>
+          <div class="cal-month-title" id="cCalTitle"></div>
+          <button class="cal-nav-btn" onclick="cNextMonth()">&#8250;</button>
+        </div>
+        <div class="cal-grid-wrap">
+          <div class="cal-weekdays"><div class="cal-wd">Do</div><div class="cal-wd">Lu</div><div class="cal-wd">Ma</div><div class="cal-wd">Mi</div><div class="cal-wd">Ju</div><div class="cal-wd">Vi</div><div class="cal-wd">Sá</div></div>
+          <div class="cal-days" id="cCalDays"></div>
+        </div>
+        <div class="blocked-month" id="cBlockedMonth">
+          <div class="blocked-month-head">
+            <span class="blocked-month-ico">🚫</span>
+            <div>
+            <div class="blocked-month-title">Días bloqueados para este mes</div>
+          <div class="blocked-month-sub" id="cBlockedSub"></div>
+         </div>
+       </div>
+  <div class="blocked-month-list" id="cBlockedList"></div>
+  <div class="cal-legend">
+    <span><i class="lg lg-avail"></i>Disponible</span>
+    <span><i class="lg lg-block"></i>Bloqueado</span>
+    <span><i class="lg lg-off"></i>No se atiende</span>
+  </div>
+</div>
+        <div class="timeslot-section" id="cTimeslotSec" style="display:none;">
+          <div class="timeslot-title" id="cTimeslotTitle">Horarios disponibles</div>
+          <div class="slots-grid" id="cSlotsGrid"></div>
+        </div>
+        <div id="cSummarySection" style="display:none;">
+          <div class="summary-box">
+            <div class="summary-row"><span class="summary-key">Servicios</span><span class="summary-val" id="cSumServ">—</span></div>
+            <div class="summary-row"><span class="summary-key">Fecha</span><span class="summary-val" id="cSumDate">—</span></div>
+            <div class="summary-row"><span class="summary-key">Hora</span><span class="summary-val" id="cSumTime">—</span></div>
+            <div class="summary-row"><span class="summary-key">Duración total</span><span class="summary-val" id="cSumDur">—</span></div>
+            <div class="summary-row"><span class="summary-key">Total</span><span class="summary-val" id="cSumPrice">—</span></div>
+          </div>
+          <div class="extras-box">
+          <label class="extras-head" for="cNotas">
+            <span class="extras-head-txt">
+              <span class="extras-title">¿Algo que debamos saber antes de tu turno?</span>
+              <span class="extras-sub">Alergias, piel sensible, embarazo, preferencias… <em>(opcional)</em></span>
+            </span>
+          </label>
+          <div class="extras-chips" id="cNotasChips">
+            <button type="button" class="extras-chip" data-txt="Alergia a: ">Alergias</button>
+            <button type="button" class="extras-chip" data-txt="Piel sensible. ">Piel sensible</button>
+            <button type="button" class="extras-chip" data-txt="Embarazo. ">Embarazo</button>
+            <button type="button" class="extras-chip" data-txt="Es mi primera vez. ">Primera vez</button>
+          </div>
+          <textarea id="cNotas" class="extras-input" rows="3" maxlength="300"
+            placeholder="Ej: soy alérgica al látex y a algunos perfumes."></textarea>
+          <div class="extras-foot">
+            <span class="extras-lock"><img class="icono-mini" src="imagenes/iconos Dandelion/candado.png" alt=""> Lo verá solo tu profesional</span>
+            <span id="cNotasCount">0 / 300</span>
+  </div>
+</div>
+          <div class="c-btn-wrap"><button class="c-btn c-btn-primary" onclick="cConfirm()">Confirmar turno</button></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/estado.js"></script>
+<script src="js/componentes.js"></script>
+<script src="js/comunes.js"></script>
+<script src="js/reserva-turno.js"></script>
+</body>
+</html>

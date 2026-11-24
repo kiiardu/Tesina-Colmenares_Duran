@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Estética — Categorías</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page active" id="pageClient">
+  <a href="inicio.html" class="home-btn" title="Volver al inicio"><img class="ico-img" src="imagenes/iconos Dandelion/casa.png" alt></a>
+  <button class="theme-btn" onclick="toggleTheme()"><img class="ico-img" src="imagenes/iconos Dandelion/luna.png" alt></button>
+  <div class="client-header">
+    <div class="client-brand-wrap" onclick="location.href='inicio.html'" style="cursor:pointer;" title="Volver al inicio">
+      <div class="logo-circle-lg" style="margin:0;">
+        <svg width="60" height="65" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 125 Q52 90 58 65" stroke="#cb9398" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <line x1="58" y1="65" x2="58" y2="28" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="83" y2="33" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="90" y2="51" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="87" y2="70" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="76" y2="86" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="34" y2="86" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="27" y2="69" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="29" y2="50" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="37" y2="32" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="58" cy="24" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="85" cy="29" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="92" cy="48" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="89" cy="68" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="78" cy="88" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="32" cy="88" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="23" cy="71" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="25" cy="47" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="35" cy="28" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+      <div class="client-brand-text">
+        <div class="brand">Dandelión</div>
+        <div class="brand-sub">Reservá tu turno</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress" id="clientProgress">
+    <div class="step done" id="cstep1"><div class="step-dot">1</div><div class="step-label">Datos</div></div>
+    <div class="step-line done" id="cline1"></div>
+    <div class="step active" id="cstep2"><div class="step-dot">2</div><div class="step-label">Categoría</div></div>
+    <div class="step-line" id="cline2"></div>
+    <div class="step" id="cstep3"><div class="step-dot">3</div><div class="step-label">Servicios</div></div>
+    <div class="step-line" id="cline3"></div>
+    <div class="step" id="cstep4"><div class="step-dot">4</div><div class="step-label">Turno</div></div>
+  </div>
+
+  <div class="client-container">
+
+    <!-- SCREEN 2: CATEGORÍAS -->
+    <div class="c-screen active" id="cs2">
+      <div class="c-back-link" onclick="location.href='datos.html'">← Volver</div>
+      <div class="c-card">
+        <div class="c-card-title">¿Qué servicio necesitás?</div>
+        <div class="c-card-sub">Elegí el rubro y luego podés seleccionar varios servicios.</div>
+        <div class="cat-grid" id="catGrid"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/estado.js"></script>
+<script src="js/componentes.js"></script>
+<script src="js/comunes.js"></script>
+<script src="js/reserva-categorias.js"></script>
+</body>
+</html>

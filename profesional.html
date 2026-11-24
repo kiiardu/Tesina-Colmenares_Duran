@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dandelión Estética — Panel profesional</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page active" id="pagePro">
+  <div class="pro-topbar">
+    <div class="pro-topbar-left">
+      <div class="pro-avatar-sm" id="proAvatarTop"></div>
+      <div>
+        <div class="pro-topbar-name" id="proNameTop">—</div>
+        <div class="pro-topbar-tag" id="proTagTop">—</div>
+      </div>
+    </div>
+    <div class="pro-topbar-right">
+      <a href="inicio.html" class="home-btn" title="Volver al inicio"><img class="ico-img" src="imagenes/iconos Dandelion/casa.png" alt></a>
+      <button class="theme-btn" onclick="toggleTheme()"><img class="ico-img" src="imagenes/iconos Dandelion/luna.png" alt></button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="pro-tabs">
+    <div class="pro-tab active" onclick="proSwitchTab('calendar',this)">📅 Turnos</div>
+    <div class="pro-tab" onclick="proSwitchTab('schedule',this)">🕐 Mi horario</div>
+  </div>
+
+  <div class="pro-content">
+    <!-- TAB: CALENDAR -->
+    <div class="pro-tab-content active" id="proTabCalendar">
+      <div class="svc-tabs" id="proSvcTabs"></div>
+      <div class="pro-cal-card">
+        <div class="pro-cal-header">
+          <div class="pro-cal-title" id="proCalSvcTitle">Calendario</div>
+          <div class="pro-cal-nav">
+            <button class="pro-cal-nav-btn" onclick="proCalPrev()">&#8249;</button>
+            <div class="pro-cal-month" id="proCalMonth"></div>
+            <button class="pro-cal-nav-btn" onclick="proCalNext()">&#8250;</button>
+          </div>
+        </div>
+        <div class="pro-cal-body">
+          <div class="pro-cal-weekdays">
+            <div class="pro-cal-wd">Do</div><div class="pro-cal-wd">Lu</div><div class="pro-cal-wd">Ma</div>
+            <div class="pro-cal-wd">Mi</div><div class="pro-cal-wd">Ju</div><div class="pro-cal-wd">Vi</div><div class="pro-cal-wd">Sá</div>
+          </div>
+          <div class="pro-cal-days" id="proCalDays"></div>
+          <div class="pro-day-panel" id="proDayPanel">
+            <div class="pro-day-panel-header">
+              <div class="pro-day-panel-title" id="proDayPanelTitle">Turnos del día</div>
+              <div class="pro-day-panel-actions">
+                <button class="btn btn-danger" id="proBlockDayBtn" onclick="proBlockDay()" style="font-size:12px;padding:6px 12px;">🚫 Bloquear día</button>
+                <button class="btn btn-outline" style="font-size:12px;padding:6px 12px;" onclick="document.getElementById('proDayPanel').classList.remove('open')">Cerrar</button>
+              </div>
+            </div>
+            <div class="pro-slot-list" id="proSlotList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: SCHEDULE -->
+    <div class="pro-tab-content" id="proTabSchedule">
+      <div class="schedule-card">
+        <div class="schedule-header">
+          <div class="schedule-title">Mi horario de trabajo</div>
+          <p style="font-size:12px;color:var(--ink-light);margin-top:4px;">Configurá los días y horas en que trabajás. Los clientes solo podrán reservar en estos horarios.</p>
+        </div>
+        <div class="schedule-body" id="scheduleBody"></div>
+        <div style="padding:0 22px 22px;">
+          <button class="schedule-save-btn" onclick="proSaveSchedule()">Guardar horario ✓</button>
+        </div>
+      </div>
+
+      <div class="block-section">
+        <div class="schedule-header" style="padding:18px 22px;border-bottom:1px solid var(--border);">
+          <div class="schedule-title">Días u horarios bloqueados</div>
+          <p style="font-size:12px;color:var(--ink-light);margin-top:4px;">Bloqueá fechas específicas o rangos horarios en los que no vas a estar disponible.</p>
+        </div>
+        <div class="blocked-list" id="blockedList"></div>
+        <div class="add-block-form">
+          <div class="add-block-group">
+            <label class="add-block-label">Fecha</label>
+            <input type="date" class="schedule-time-input" id="blockDate" style="width:100%;">
+          </div>
+          <div class="add-block-group">
+            <label class="add-block-label">Motivo (opcional)</label>
+            <input type="text" class="schedule-time-input" id="blockReason" placeholder="Ej: Vacaciones" style="width:100%;">
+          </div>
+          <button class="btn btn-primary" onclick="proAddBlock()" style="height:36px;white-space:nowrap;">+ Bloquear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="adm-modal" id="modalCliente"><div class="adm-modal-box" id="modalClienteBox"></div></div>
+
+<script src="js/config.js"></script>
+<script src="js/estado.js"></script>
+<script src="js/componentes.js"></script>
+<script src="js/comunes.js"></script>
+<script src="js/profesional.js"></script>
+</body>
+</html>

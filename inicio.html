@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dandelión Estética</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a href="inicio.html" class="home-btn" title="Volver al inicio"><img class="ico-img" src="imagenes/iconos Dandelion/casa.png" alt></a>
+  <button class="theme-btn" onclick="toggleTheme()"><img class="ico-img" src="imagenes/iconos Dandelion/luna.png" alt></button>
+
+<section class="welcome-hero">
+  <div class="hero-content">
+    <span class="hero-subtitle">Centro de Estética & Bienestar</span>
+    <h1 class="hero-title">Dandelión</h1>
+    <p class="hero-description">
+      Un espacio diseñado para resaltar tu belleza natural y brindarte el cuidado que te merecés. 
+      Gestioná tus turnos, servicios y profesionales en un solo lugar de forma simple y relajante.
+    </p>
+        <h2 class="hero-question">¿Qué deseas hacer?</h2>
+    <div class="hero-actions">
+      <a href="datos.html" class="hero-btn">Sacar turno</a>
+      <button type="button" class="hero-btn" data-login onclick="openLogin()">Abrir panel profesional</button>
+    </div>
+  </div>
+  
+  <div class="hero-gallery">
+  <div class="gallery-item large">
+    <img src="imagenes/dermatologia/masaje_facial.jpg" alt="Masajes">
+  </div>
+  <div class="gallery-item text-card">
+    <p class="card-quote">"El cuidado personal no es un lujo, es una prioridad."</p>
+  </div>
+  <div class="gallery-item tall">
+    <img src="imagenes/peluqueria/balayage6.jpg" alt="Detalles Naturales">
+  </div>
+  <div class="gallery-item">
+    <img src="imagenes/lashista/lifting.jpeg" alt="Maquillaje">
+  </div>
+</section>
+
+<script src="js/config.js"></script>
+<script src="js/estado.js"></script>
+<script src="js/componentes.js"></script>
+<script src="js/comunes.js"></script>
+</body>
+</html>

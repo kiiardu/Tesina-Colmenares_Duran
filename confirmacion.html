@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dandelión Estética — Turno confirmado</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page active" id="pageClient">
+  <a href="inicio.html" class="home-btn" title="Volver al inicio"><img class="ico-img" src="imagenes/iconos Dandelion/casa.png" alt></a>
+  <button class="theme-btn" onclick="toggleTheme()"><img class="ico-img" src="imagenes/iconos Dandelion/luna.png" alt></button>
+  <div class="client-header">
+    <div class="client-brand-wrap" onclick="location.href='inicio.html'" style="cursor:pointer;" title="Volver al inicio">
+      <div class="logo-circle-lg" style="margin:0;">
+        <svg width="60" height="65" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M55 125 Q52 90 58 65" stroke="#cb9398" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <line x1="58" y1="65" x2="58" y2="28" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="83" y2="33" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="90" y2="51" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="87" y2="70" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="76" y2="86" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="34" y2="86" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="27" y2="69" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="29" y2="50" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="37" y2="32" stroke="#cb9398" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="58" cy="24" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="85" cy="29" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="92" cy="48" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="89" cy="68" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="78" cy="88" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="32" cy="88" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="23" cy="71" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="25" cy="47" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+          <circle cx="35" cy="28" r="5" stroke="#cb9398" stroke-width="1.8" fill="none"/>
+        </svg>
+      </div>
+      <div class="client-brand-text">
+        <div class="brand">Dandelión</div>
+        <div class="brand-sub">Reservá tu turno</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="client-container">
+
+    <!-- SCREEN 5: ÉXITO -->
+    <div class="c-screen active" id="cs5">
+      <div class="c-card">
+        <div class="success-screen">
+          <div class="success-icon" id="cSuccessIcon"><img class="icono-grande" src="imagenes/iconos Dandelion/flor.png" alt=""></div>
+          <div class="success-title" id="cSuccessTitle">¡Turno confirmado!</div>
+          <div class="success-text" id="cSuccessText">Tu turno fue agendado exitosamente.<br>Te mandamos un recordatorio por WhatsApp un día antes.</div>
+          <div class="notif-badge" id="cNotifBadge">🔔 Recordatorio automático activado</div>
+          <div class="cancelled-notice" id="cCancelledNotice" style="display:none;">
+            <p>❌ Tu turno fue cancelado. Si querés podés reservar uno nuevo.</p>
+          </div>
+          <div class="confirm-card">
+  <div class="confirm-row"><span class="confirm-icon"><img class="icono" src="imagenes/iconos Dandelion/persona_usuario.png" alt=""></span><span class="confirm-key">Clienta</span><span class="confirm-val" id="cConfNombre">—</span></div>
+  <div class="confirm-row"><span class="confirm-icon"><img class="icono" src="imagenes/iconos Dandelion/maq_icono.png" alt=""></span><span class="confirm-key">Servicio</span><span class="confirm-val" id="cConfServ">—</span></div>
+  <div class="confirm-row"><span class="confirm-icon"><img class="icono" src="imagenes/iconos Dandelion/calendario.png" alt=""></span><span class="confirm-key">Fecha</span><span class="confirm-val" id="cConfDate">—</span></div>
+  <div class="confirm-row"><span class="confirm-icon"><img class="icono" src="imagenes/iconos Dandelion/reloj.png" alt=""></span><span class="confirm-key">Hora</span><span class="confirm-val" id="cConfTime">—</span></div>
+  <div class="confirm-row"><span class="confirm-icon"><img class="icono" src="imagenes/iconos Dandelion/total.png" alt=""></span><span class="confirm-key">Total</span><span class="confirm-val" id="cConfPrice">—</span></div>
+</div>
+          <div class="success-actions">
+            <button class="c-btn c-btn-primary" onclick="cAddAnotherService()"><img class="icono-btn" src="imagenes/iconos Dandelion/mas.png" alt=""> Agregar otro servicio</button>
+<button class="c-btn c-btn-back" id="cCancelBtn" onclick="cCancelBooking()" style="border:1.5px solid rgba(180,80,80,0.3);color:#a04040;"><img class="icono-btn" src="imagenes/iconos Dandelion/equis.png" alt=""> Cancelar este turno</button>
+            <button class="c-btn c-btn-back" onclick="cReset()">Reservar un turno nuevo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/estado.js"></script>
+<script src="js/componentes.js"></script>
+<script src="js/comunes.js"></script>
+<script src="js/reserva-confirmacion.js"></script>
+</body>
+</html>
