@@ -24,7 +24,31 @@ function escribirJSON(storage, clave, valor){
   catch(e){ /* almacenamiento no disponible: se sigue sin persistir */ }
 }
 
-const guardado = leerJSON(localStorage, CLAVE_ESTADO) || {};
+/* ---------- Estado compartido: se guarda en la base de datos (estado.php) ---------- */
+function pedirServidor(metodo, cuerpo){
+  try{
+    const x = new XMLHttpRequest();
+    x.open(metodo, 'estado.php', false);
+    if(cuerpo){ x.setRequestHeader('Content-Type', 'application/json'); x.send(JSON.stringify(cuerpo)); }
+    else x.send();
+    if(x.status === 200) return { ok:true, datos: JSON.parse(x.responseText) };
+  }catch(e){}
+  return { ok:false, datos:null };
+}
+function cargarEstadoInicial(){
+  const local = leerJSON(localStorage, CLAVE_ESTADO);
+  const srv = pedirServidor('GET');
+  if(!srv.ok) return local || {};
+  let g = srv.datos;
+  if(!g && local){
+    pedirServidor('POST', { horarios: local.horarios, bloqueos: local.bloqueos, nuevos: local.nuevos });
+    g = local;
+  }
+  g = g || {};
+  escribirJSON(localStorage, CLAVE_ESTADO, g);
+  return g;
+}
+const guardado = cargarEstadoInicial();
 
 /* ---------- Horarios y días bloqueados por profesional ---------- */
 const proSchedules = {};
@@ -34,42 +58,48 @@ Object.keys(PROFESSIONALS).forEach(k => {
   proBlockedDays[k] = (guardado.bloqueos && guardado.bloqueos[k]) || [];
 });
 
-/* ---------- Turnos ----------
-   Los turnos de ejemplo se generan en cada carga (son relativos a "hoy").
-   Lo que se persiste son los turnos nuevos y los cambios de estado. */
+/* ---------- Turnos reservados por las clientas ---------- */
 const bookedSlots = new Set();
-
 const bookingRecords = [];
-
-const ESTADO_INICIAL = {};
-bookingRecords.forEach(r => { ESTADO_INICIAL[r.id] = r.status; });
-
-/* Aplicar lo guardado: cambios de estado de los turnos de ejemplo... */
-const estadosGuardados = guardado.estados || {};
-bookingRecords.forEach(r => {
-  if(estadosGuardados[r.id]){
-    r.status = estadosGuardados[r.id];
-    if(r.status === 'cancelled') bookedSlots.delete(`${r.dateKey}|${r.slot}`);
-  }
-});
-/* ...y los turnos que reservaron las clientas. */
 (guardado.nuevos || []).forEach(r => {
   bookingRecords.push(r);
   if(r.status !== 'cancelled') bookedSlots.add(`${r.dateKey}|${r.slot}`);
 });
 
-/* Llamar después de cualquier cambio en horarios, bloqueos o turnos. */
-function guardarEstado(){
-  const estados = {};
-  bookingRecords.forEach(r => {
-    if(r.semilla && r.status !== ESTADO_INICIAL[r.id]) estados[r.id] = r.status;
+function guardarEstado(partes, clavePro){
+  escribirJSON(localStorage, CLAVE_ESTADO, { horarios: proSchedules, bloqueos: proBlockedDays, nuevos: bookingRecords });
+  const cuerpo = {};
+  const todo = !partes;
+  if(todo || partes === 'turnos') cuerpo.nuevos = bookingRecords;
+  if(todo || partes === 'horarios') cuerpo.horarios = clavePro ? { [clavePro]: proSchedules[clavePro] } : proSchedules;
+  if(todo || partes === 'bloqueos') cuerpo.bloqueos = clavePro ? { [clavePro]: proBlockedDays[clavePro] } : proBlockedDays;
+  const r = pedirServidor('POST', cuerpo);
+  if(r.ok && r.datos && r.datos.ok){ aplicarEstado(r.datos.estado); return true; }
+  if(typeof avisar === 'function') avisar('No se pudo guardar en la base de datos. Revisá que Apache y MySQL estén encendidos.');
+  return false;
+}
+function aplicarEstado(g){
+  if(!g) return false;
+  const antes = JSON.stringify([proSchedules, proBlockedDays, bookingRecords]);
+  Object.keys(g.horarios || {}).forEach(k => { if(k in proSchedules) proSchedules[k] = g.horarios[k]; });
+  Object.keys(g.bloqueos || {}).forEach(k => { if(k in proBlockedDays) proBlockedDays[k] = g.bloqueos[k]; });
+  (g.nuevos || []).forEach(r => {
+    const mio = bookingRecords.find(x => x.id === r.id);
+    if(!mio){ bookingRecords.push(r); }
+    else if(mio.status !== r.status){ mio.status = r.status; }
+    const final = mio || r;
+    const clave = `${final.dateKey}|${final.slot}`;
+    if(final.status === 'cancelled') bookedSlots.delete(clave); else bookedSlots.add(clave);
   });
-  escribirJSON(localStorage, CLAVE_ESTADO, {
-    horarios: proSchedules,
-    bloqueos: proBlockedDays,
-    estados,
-    nuevos: bookingRecords.filter(r => !r.semilla),
-  });
+  return antes !== JSON.stringify([proSchedules, proBlockedDays, bookingRecords]);
+}
+function iniciarSincronizacion(segundos = 15){
+  setInterval(() => {
+    if(document.hidden) return;
+    fetch('estado.php').then(r => r.json()).then(g => {
+      if(aplicarEstado(g) && typeof window.alActualizarEstado === 'function') window.alActualizarEstado();
+    }).catch(() => {});
+  }, segundos * 1000);
 }
 
 /* ---------- Reserva en curso (formulario de la clienta) ---------- */

@@ -197,7 +197,7 @@ async function proBlockDay(){
   const hasBookings=bookingRecords.some(b=>b.dateKey===proSelectedDayKey&&b.status==='confirmed');
   if(hasBookings&&!(await confirmar('Hay turnos confirmados para este día. ¿Querés bloquearlo igual?', 'Bloquear'))) return;
   proBlockedDays[currentPro.key].push({date:proSelectedDayKey,reason:'Bloqueado manualmente'});
-  guardarEstado();
+  guardarEstado('bloqueos', currentPro.key);
   proRenderCal();
   const d=new Date(proSelectedDayKey+'T12:00:00');
   proOpenDay(d.getFullYear(),d.getMonth(),d.getDate(),proSelectedDayKey);
@@ -207,7 +207,7 @@ async function proBlockDay(){
 function proUnblockDay(){
   if(!proSelectedDayKey||!currentPro) return;
   proBlockedDays[currentPro.key]=proBlockedDays[currentPro.key].filter(b=>b.date!==proSelectedDayKey);
-  guardarEstado();
+  guardarEstado('bloqueos', currentPro.key);
   proRenderCal();
   const d=new Date(proSelectedDayKey+'T12:00:00');
   proOpenDay(d.getFullYear(),d.getMonth(),d.getDate(),proSelectedDayKey);
@@ -220,7 +220,7 @@ async function proCancelBooking(bookingId,dateKey,slot){
   if(rec){
     rec.status='cancelled';
     bookedSlots.delete(`${dateKey}|${slot}`);
-    guardarEstado();
+    guardarEstado('turnos');
     // 🔔 NOTIFICACIÓN: Mostrar cartelito de cancelación
     showCancelAlert(rec,'pro');
     showToast('Turno cancelado', `El turno de ${rec.nombre} fue cancelado.`, '❌');
@@ -286,7 +286,7 @@ function proSaveSchedule(){
     if(startEl) proSchedules[currentPro.key][dow].start=startEl.value;
     if(endEl) proSchedules[currentPro.key][dow].end=endEl.value;
   });
-  guardarEstado();
+  guardarEstado('horarios', currentPro.key);
   showToast('Horario guardado','Tu horario fue actualizado correctamente.','✅');
   proRenderSchedule();
 }
@@ -319,7 +319,7 @@ function proAddBlock(){
   if(!dateVal){ avisar('Seleccioná una fecha.'); return; }
   if(proBlockedDays[currentPro.key].some(b=>b.date===dateVal)){ avisar('Esta fecha ya está bloqueada.'); return; }
   proBlockedDays[currentPro.key].push({date:dateVal,reason});
-  guardarEstado();
+  guardarEstado('bloqueos', currentPro.key);
   document.getElementById('blockDate').value='';
   document.getElementById('blockReason').value='';
   proRenderBlockedList();
@@ -329,7 +329,7 @@ function proAddBlock(){
 function proRemoveBlock(idx){
   if(!currentPro) return;
   proBlockedDays[currentPro.key].splice(idx,1);
-  guardarEstado();
+  guardarEstado('bloqueos', currentPro.key);
   proRenderBlockedList();
 }
 
@@ -372,7 +372,7 @@ function proVerClienta(id){
 
   const fila = (k, v) => `<div class="ficha-row"><span class="ficha-key">${k}</span><span class="ficha-val">${v}</span></div>`;
 
-  const texto = `Hola ${r.nombre.split(' ')[0]}! 🌼 Te recordamos tu turno en Dandelión Estética: ${r.servicio}, ${fecha} a las ${r.slot} hs. Si no podés venir, avisanos con tiempo. ¡Te esperamos!`;
+  const texto = `Hola ${r.nombre.split(' ')[0]}! Te recordamos tu turno en Dandelión Estética: ${r.servicio}, ${fecha} a las ${r.slot} hs. Si no podés venir, avisanos con tiempo. ¡Te esperamos!`;
   const wa = r.tel ? `https://wa.me/${telWhatsApp(r.tel)}?text=${encodeURIComponent(texto)}` : '';
   const mail = r.email ? `mailto:${encodeURIComponent(r.email)}?subject=${encodeURIComponent('Recordatorio de tu turno - Dandelión Estética')}&body=${encodeURIComponent(texto)}` : '';
 
@@ -398,3 +398,14 @@ function proVerClienta(id){
 function proCerrarFicha(){ document.getElementById('modalCliente').classList.remove('open'); }
 const _modalFicha = document.getElementById('modalCliente');
 if(_modalFicha) _modalFicha.addEventListener('click', e => { if(e.target.id === 'modalCliente') proCerrarFicha(); });
+
+window.alActualizarEstado = function(){
+  if(!currentPro) return;
+  proRenderCal();
+  const panel = document.getElementById('proDayPanel');
+  if(proSelectedDayKey && panel && panel.classList.contains('open')){
+    const d = new Date(proSelectedDayKey + 'T12:00:00');
+    proOpenDay(d.getFullYear(), d.getMonth(), d.getDate(), proSelectedDayKey);
+  }
+};
+iniciarSincronizacion();
